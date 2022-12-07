@@ -1,0 +1,15 @@
+# Find the Dockerfile for mcr.microsoft.com/azure-functions/powershell:3.0-powershell${VARIANT}-core-tools at this URL
+# https://github.com/Azure/azure-functions-docker/blob/dev/host/3.0/buster/amd64/powershell
+
+# Update the VARIANT arg in devcontainer.json to pick a supported PowerShell version: 7, 6
+ARG TOOLSVER=4
+ARG VARIANT=7.2
+FROM mcr.microsoft.com/azure-functions/powershell:${TOOLSVER}-powershell${VARIANT}-core-tools
+
+# Because MITM certificates
+COPY certs/. /usr/local/share/ca-certificates/ 
+ENV NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/mitm.pem
+RUN update-ca-certificates
+
+COPY build/. /usr/local/share/build/ 
+RUN pwsh -File '/usr/local/share/build/setup.ps1'

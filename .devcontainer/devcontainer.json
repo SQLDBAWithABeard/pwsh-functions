@@ -1,0 +1,49 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.241.1/containers/azure-bicep
+{
+  "name": "AzureFunctions pwsh",
+  "dockerComposeFile": "docker-compose.yml",
+  "workspaceFolder": "/workspace",
+  "service": "vscodeapp",
+  // Configure tool-specific properties.
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-azurefunctions",
+        "Azurite.azurite",
+        "ms-vscode.powershell",
+        "eamodio.gitlens",
+        "ms-azuretools.vscode-bicep"
+      ]
+    }
+  },
+  "settings": {
+    "dotnetAcquisitionExtension.existingDotnetPath": [
+      {
+        "extensionId": "ms-azuretools.vscode-bicep",
+        "path": "/usr/bin/dotnet"
+      }
+    ],
+    "editor.renderWhitespace": "all",
+    "remote.downloadExtensionsLocally": true,
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+        "path": "bash",
+        "icon": "terminal-bash"
+      },
+      "pwsh": {
+        "path": "pwsh",
+        "icon": "terminal-powershell"
+      }
+    },
+    "terminal.integrated.defaultProfile.linux": "pwsh"
+  },  
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [
+    7071
+  ] //,
+  // Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+  //"remoteUser": "vscode"
+}
